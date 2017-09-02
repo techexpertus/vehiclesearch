@@ -23,7 +23,7 @@ public class CSVParser implements ParserFile {
 
             while (vehicles.readRecord()) {
                 results.add(Vehicle.createVehicle(
-                        vehicles.get("registrationNumber"),
+                        vehicles.get("Registration number"),
                         vehicles.get("make"),
                         vehicles.get("colour")));
 

@@ -27,6 +27,8 @@ public class VehicleDetailsView extends BasePage {
     public Vehicle extractVehicleDetails() {
 
         Map<String, String> vehicle = new HashMap<>();
+        String keyName = "";
+
         extractVehicleDetailItem(vehicle, "Registration number");
         extractVehicleDetailItem(vehicle, "Make");
         extractVehicleDetailItem(vehicle, "Colour");
@@ -35,11 +37,24 @@ public class VehicleDetailsView extends BasePage {
 
     private void extractVehicleDetailItem(Map<String, String> vehicle, final String itemText) {
 
+        final String keyName = getKeyName(itemText);
         driver.findElement(listSummaryIdentifier)
               .findElements(listSummaryItemIdentifier)
               .stream()
               .filter(item -> item.findElements(By.cssSelector("span")).get(0).getText().contains(itemText))
               .findFirst()
-              .ifPresent(found -> vehicle.put(itemText, found.findElements(By.cssSelector("span")).get(1).getText()));
+              .ifPresent(found -> vehicle.put(keyName, found.findElements(By.cssSelector("span")).get(1).getText()));
+    }
+
+    private String getKeyName(final String itemText) {
+
+        if (itemText.equals("Registration number")) {
+            return "Registration number";
+        } else if (itemText.equals("Make")) {
+            return "make";
+        } else if (itemText.equals("Colour")) {
+            return "colour";
+        }
+        return "";
     }
 }

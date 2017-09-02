@@ -6,7 +6,6 @@ import com.selenium.pageobjects.vehicleinformation.StartPage;
 import com.selenium.pageobjects.vehicleinformation.VehicleDetailsView;
 import config.DriverConfiguration;
 import config.State;
-import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Wait;
@@ -16,8 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@ContextConfiguration(classes = { DriverConfiguration.class})
+@ContextConfiguration(classes = {DriverConfiguration.class})
 public class UISteps implements En {
 
     @Autowired
@@ -32,19 +32,37 @@ public class UISteps implements En {
     public UISteps() {
 
         When("^I search the vehicles from the file on UI$", () -> {
-            state.extractVehicles();
-            driver.get("https://www.gov.uk/get-vehicle-information-from-dvla");
-            new StartPage(driver,waitItem).waitForLoad().clickStart();
-            new EnterRegistratioNumerView(driver,waitItem).waitForLoad().searchRegistrationNumber("HG05 VBF");
-            List<Vehicle> actualVehicles = new ArrayList<>();
-            actualVehicles.add(new VehicleDetailsView(driver,waitItem).waitForLoad().extractVehicleDetails());
+            state.extracVehiclesFromFiles();
+            List<Vehicle> results = new ArrayList<>();
 
-            System.out.println("Finished extracting");
+            for (Vehicle vehicle : state.vehiclesFromFiles) {
+                results.add(fetchVehiclesDetails(vehicle));
+            }
+            state.vehiclesFromUI = results;
         });
 
         Then("^UI should return vehicle details as per expected details in csv file$", () -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+
+            List<Vehicle> expectedVehicles = state.vehiclesFromFiles;
+            List<Vehicle> actualVehicles = state.vehiclesFromUI;
+            int max = expectedVehicles.size() > actualVehicles.size() ? expectedVehicles.size() : actualVehicles.size();
+            for (int i = 0; i < max; i++) {
+                assertTrue("Checking vehicle " + expectedVehicles.get(i).getVehicleDetails().get("Registration number"),
+                           expectedVehicles.get(i).compare(actualVehicles.get(i)));
+            }
         });
+    }
+
+    private Vehicle fetchVehiclesDetails(Vehicle vehicle) {
+
+        driver.get("https://www.gov.uk/get-vehicle-information-from-dvla");
+
+        new StartPage(driver, waitItem).waitForLoad().clickStart();
+        new EnterRegistratioNumerView(driver, waitItem)
+                .waitForLoad()
+                .searchRegistrationNumber(vehicle.getVehicleDetails().get("Registration number"));
+        return new VehicleDetailsView(driver, waitItem)
+                .waitForLoad()
+                .extractVehicleDetails();
     }
 }
