@@ -29,16 +29,11 @@ public class BddConfiguration {
 
     @Bean
     public WebDriver driver(){
-        Path path = FileSystems.getDefault().getPath("bdd/src/main/resources/drivers/geckodriver");
+        Path path = FileSystems.getDefault().getPath("src/main/resources/drivers/geckodriver");
         System.setProperty("webdriver.gecko.driver",path.toString());
         return new FirefoxDriver();
     }
 
 
-
-//    @Bean
-//    public WebDriver chromeDriver(){
-//        return new ChromeDriver();
-//    }
 
 }

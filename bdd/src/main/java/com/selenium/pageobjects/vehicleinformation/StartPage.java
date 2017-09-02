@@ -1,11 +1,11 @@
 package com.selenium.pageobjects.vehicleinformation;
 
 
+import com.bdd.helpers.Utils;
 import com.selenium.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Wait;
-
 
 public class StartPage extends BasePage {
 
@@ -14,15 +14,20 @@ public class StartPage extends BasePage {
 
     public StartPage(WebDriver driver,Wait<WebDriver> waitItem){
         super(driver, waitItem);
+        Utils.log("Loading " + this.getClass().getName());
 
     }
     public StartPage waitForLoad(){
-        waitItem.until(driver -> driver.findElement(By.cssSelector("h1")).getText().contains(
-                "Get vehicle information from DVLA"));
+
+        waitExplicit(By.cssSelector("h1"), "Get vehicle information from DVLA");
+        Utils.log("Waited for loading of  " + this.getClass().getName());
         return this;
     }
 
+
+
     public void clickStart() {
         driver.findElement(startButtonIdentifier).click();
+        Utils.log("Clicked on Start button" );
     }
 }

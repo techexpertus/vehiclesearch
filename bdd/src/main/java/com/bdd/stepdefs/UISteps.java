@@ -1,7 +1,7 @@
 package com.bdd.stepdefs;
 
 import com.bdd.model.Vehicle;
-import com.selenium.pageobjects.vehicleinformation.EnterRegistratioNumerView;
+import com.selenium.pageobjects.vehicleinformation.EnterRegistrationNumberView;
 import com.selenium.pageobjects.vehicleinformation.StartPage;
 import com.selenium.pageobjects.vehicleinformation.VehicleDetailsView;
 import config.DriverConfiguration;
@@ -58,7 +58,7 @@ public class UISteps implements En {
         driver.get("https://www.gov.uk/get-vehicle-information-from-dvla");
 
         new StartPage(driver, waitItem).waitForLoad().clickStart();
-        new EnterRegistratioNumerView(driver, waitItem)
+        new EnterRegistrationNumberView(driver, waitItem)
                 .waitForLoad()
                 .searchRegistrationNumber(vehicle.getVehicleDetails().get("Registration number"));
         return new VehicleDetailsView(driver, waitItem)

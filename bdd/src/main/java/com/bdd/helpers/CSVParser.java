@@ -22,10 +22,12 @@ public class CSVParser implements ParserFile {
             vehicles.readHeaders();
 
             while (vehicles.readRecord()) {
-                results.add(Vehicle.createVehicle(
-                        vehicles.get("Registration number"),
-                        vehicles.get("make"),
-                        vehicles.get("colour")));
+
+                    results.add(Vehicle.createVehicle(
+                            vehicles.get("Registration number"),
+                            vehicles.get("make"),
+                            vehicles.get("colour")));
+
 
             }
             vehicles.close();

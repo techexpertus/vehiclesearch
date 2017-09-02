@@ -1,5 +1,6 @@
 package com.selenium.pageobjects.vehicleinformation;
 
+import com.bdd.helpers.Utils;
 import com.bdd.model.Vehicle;
 import com.selenium.pageobjects.BasePage;
 import org.openqa.selenium.By;
@@ -16,18 +17,20 @@ public class VehicleDetailsView extends BasePage {
 
     public VehicleDetailsView(WebDriver driver, Wait<WebDriver> waitItem) {
         super(driver, waitItem);
+        Utils.log("Loading " + this.getClass().getName());
     }
 
     public VehicleDetailsView waitForLoad() {
-        waitItem.until(driver -> driver.findElement(By.cssSelector("h1.heading-large")).getText().contains(
-                "Is this the vehicle you are looking for?"));
+
+        waitExplicit(By.cssSelector("h1.heading-large"), "Is this the vehicle you are looking for?");
+
+        Utils.log("Waited for loading of " + this.getClass().getName());
         return this;
     }
 
     public Vehicle extractVehicleDetails() {
 
         Map<String, String> vehicle = new HashMap<>();
-        String keyName = "";
 
         extractVehicleDetailItem(vehicle, "Registration number");
         extractVehicleDetailItem(vehicle, "Make");
@@ -38,6 +41,7 @@ public class VehicleDetailsView extends BasePage {
     private void extractVehicleDetailItem(Map<String, String> vehicle, final String itemText) {
 
         final String keyName = getKeyName(itemText);
+        Utils.log("Extracting vehicle details : " + itemText);
         driver.findElement(listSummaryIdentifier)
               .findElements(listSummaryItemIdentifier)
               .stream()

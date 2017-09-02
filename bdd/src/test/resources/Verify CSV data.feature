@@ -5,4 +5,3 @@ Feature: This feature verifies data ingested from csv file with data on acutal g
     When I search the vehicles from the file on UI
     Then UI should return vehicle details as per expected details in csv file
 
-

@@ -39,7 +39,7 @@ public class FilesRetrieverSvcIT {
                                           .anyMatch(
                                                   fileDetails -> fileDetails.getFileName().equals("vehicles_01.csv")
                                                           && fileDetails.getFileMimeType().equals("text/csv")
-                                                          && fileDetails.getFileSize().equals(134L)
+                                                          && fileDetails.getFileSize().equals(136L)
                                                           && fileDetails.getFileExtn().equals("csv")
                                           );
         assertTrue(result);

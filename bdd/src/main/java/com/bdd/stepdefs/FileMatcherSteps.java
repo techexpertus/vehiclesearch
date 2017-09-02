@@ -28,5 +28,13 @@ public class FileMatcherSteps implements En {
                   state.searchPath = dirPath;
               }
         );
+
+        Given("^I invoke file retrieve service for excel files located in \"([^\"]*)\"$",
+              (String dirPath) -> {
+                  List<String> allowableMimeTypes = Arrays.asList("application/vnd.ms-excel");
+                  state.fileDetailsList = filesRetrieverSvc.getFiles(dirPath,allowableMimeTypes);
+                  state.searchPath = dirPath;
+              }
+        );
     }
 }

@@ -71,7 +71,7 @@ public class FilesRetrieverSvcImpl implements FilesRetrieverSvc {
         MimetypesFileTypeMap resultMimeTypes = new MimetypesFileTypeMap();
         resultMimeTypes.addMimeTypes("application/msword doc DOC");
         resultMimeTypes.addMimeTypes("application/json json JSON");
-        resultMimeTypes.addMimeTypes("application/vnd.ms-excel xls XLS");
+        resultMimeTypes.addMimeTypes("application/vnd.ms-excel xls XLS xlsx");
         resultMimeTypes.addMimeTypes("application/pdf pdf PDF");
         resultMimeTypes.addMimeTypes("application/xml xml XML");
         resultMimeTypes.addMimeTypes("text/html html htm HTML HTM");
