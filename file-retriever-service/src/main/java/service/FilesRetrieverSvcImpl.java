@@ -2,6 +2,7 @@ package service;
 
 import model.FileDetails;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.stereotype.Service;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+@Service
 public class FilesRetrieverSvcImpl implements FilesRetrieverSvc {
 
     private MimetypesFileTypeMap mimeTypes = getMimetypesFileTypeMap();
@@ -52,7 +54,7 @@ public class FilesRetrieverSvcImpl implements FilesRetrieverSvc {
                 FileDetails.getNewFileDetails(
                         path.getFileName().toString(),
                         mimeTypes.getContentType(path.getFileName().toString()),
-                        path.toFile().length() / 1024,
+                        path.toFile().length(),
                         FilenameUtils.getExtension(path.getFileName().toString())
                 ));
     }

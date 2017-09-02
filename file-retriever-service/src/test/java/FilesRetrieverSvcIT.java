@@ -24,7 +24,7 @@ public class FilesRetrieverSvcIT {
     @Autowired
     private FilesRetrieverSvc filesRetrieverSvc;
 
-    @Value("${SEARCH_PATH:/Users/shambugpujar/IdeaProjects/filematcher/src/test/resources/data}")
+    @Value("${SEARCH_PATH:/Users/shambugpujar/IdeaProjects/vehiclesearch/file-retriever-service/src/test/resources/data}")
     private String searchPath;
 
     @Test
@@ -39,7 +39,7 @@ public class FilesRetrieverSvcIT {
                                           .anyMatch(
                                                   fileDetails -> fileDetails.getFileName().equals("vehicles_01.csv")
                                                           && fileDetails.getFileMimeType().equals("text/csv")
-                                                          && fileDetails.getFileSize().equals(0L)
+                                                          && fileDetails.getFileSize().equals(134L)
                                                           && fileDetails.getFileExtn().equals("csv")
                                           );
         assertTrue(result);
