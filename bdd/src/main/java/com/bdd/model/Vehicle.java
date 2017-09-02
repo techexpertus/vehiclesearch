@@ -1,17 +1,22 @@
 package com.bdd.model;
 
-public class Vehicle {
-    private String registrationNumber;
-    private String make;
-    private String color;
+import java.util.HashMap;
+import java.util.Map;
 
-    public Vehicle(String registrationNumber, String make, String color) {
-        this.registrationNumber = registrationNumber;
-        this.make = make;
-        this.color = color;
+public class Vehicle {
+    private Map<String, String> details = new HashMap<>();
+
+    public Vehicle(String registrationNumber, String make, String colour) {
+        details.put("registrationNumber", registrationNumber);
+        details.put("make", make);
+        details.put("colour", colour);
     }
 
-    public  static Vehicle createVehicle(String registrationNumber, String make, String color){
-        return new Vehicle(registrationNumber,make,color);
+    public Vehicle(Map<String,String> details){
+        this.details = details;
+    }
+
+    public static Vehicle createVehicle(String registrationNumber, String make, String colour) {
+        return new Vehicle(registrationNumber, make, colour);
     }
 }

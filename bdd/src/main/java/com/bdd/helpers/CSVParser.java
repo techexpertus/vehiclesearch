@@ -25,7 +25,7 @@ public class CSVParser implements ParserFile {
                 results.add(Vehicle.createVehicle(
                         vehicles.get("registrationNumber"),
                         vehicles.get("make"),
-                        vehicles.get("color")));
+                        vehicles.get("colour")));
 
             }
             vehicles.close();

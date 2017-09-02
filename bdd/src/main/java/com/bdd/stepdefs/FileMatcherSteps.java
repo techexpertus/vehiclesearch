@@ -1,8 +1,7 @@
 package com.bdd.stepdefs;
 
-import config.BddConfiguration;
+import config.DriverConfiguration;
 import config.State;
-import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,7 +10,7 @@ import service.FilesRetrieverSvc;
 import java.util.Arrays;
 import java.util.List;
 
-@ContextConfiguration(classes = BddConfiguration.class)
+@ContextConfiguration(classes = DriverConfiguration.class)
 public class FileMatcherSteps implements En {
 
     @Autowired
